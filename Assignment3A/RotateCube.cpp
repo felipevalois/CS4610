@@ -12,257 +12,303 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/normal.hpp>
 
-
 GLuint vao;
 int Index = 0;
 GLuint program;
 const int NumVertices = 36;
-glm::vec4 points[NumVertices];
-glm::vec4 colors[NumVertices];
+
+
+bool isPressed = false;
+double oldX;
+double oldY;
+double hrotate = 0;
+double vrotate = 0;
 
 
 glm::mat4 model = glm::mat4(1.0);
-float fov = 45.0f;//field of view
-float ncp = 0.1f;//near clipping-plane
-float fcp = 100.0f;//far clipping-plane
-float ar = 1.0f;//aspect ratio
-bool isPressed = false;
-double oldX, oldY;
-float hrotate, vrotate;
+glm::vec3 eye(0.0f, 0.0f, 2.0f);
+glm::vec3 at(0.0f, 0.0f, 0.0f);
+glm::vec3 up(0.0, 1.0f, 0.0f);
+glm::vec4 points[NumVertices];
+glm::vec4 colors[NumVertices];
 
 //----------------------------------------------------------------------------
 
 glm::vec4 vertices[8] = {
-	glm::vec4(-0.5, -0.5, 0.5, 1.0),
-	glm::vec4(-0.5, 0.5, 0.5, 1.0),
-	glm::vec4(0.5, 0.5, 0.5, 1.0),
-	glm::vec4(0.5, -0.5, 0.5, 1.0),
-	glm::vec4(-0.5, -0.5, -0.5, 1.0),
-	glm::vec4(-0.5, 0.5, -0.5, 1.0),
-	glm::vec4(0.5, 0.5, -0.5, 1.0),
-	glm::vec4(0.5, -0.5, -0.5, 1.0)
-};
+    glm::vec4(-0.5, -0.5, 0.5, 1.0),
+    glm::vec4(-0.5, 0.5, 0.5, 1.0),
+    glm::vec4(0.5, 0.5, 0.5, 1.0),
+    glm::vec4(0.5, -0.5, 0.5, 1.0),
+    glm::vec4(-0.5, -0.5, -0.5, 1.0),
+    glm::vec4(-0.5, 0.5, -0.5, 1.0),
+    glm::vec4(0.5, 0.5, -0.5, 1.0),
+    glm::vec4(0.5, -0.5, -0.5, 1.0)};
 
 glm::vec4 vertex_colors[8] = {
-	glm::vec4(0.0, 0.0, 0.0, 1.0),  // black
-	glm::vec4(1.0, 0.0, 0.0, 1.0),  // red
-	glm::vec4(1.0, 1.0, 0.0, 1.0),  // yellow
-	glm::vec4(0.0, 1.0, 0.0, 1.0),  // green
-	glm::vec4(0.0, 0.0, 1.0, 1.0),  // blue
-	glm::vec4(1.0, 0.0, 1.0, 1.0),  // magenta
-	glm::vec4(1.0, 1.0, 1.0, 1.0),  // white
-	glm::vec4(0.0, 1.0, 1.0, 1.0)   // cyan
+    glm::vec4(0.0, 0.0, 0.0, 1.0), // black
+    glm::vec4(1.0, 0.0, 0.0, 1.0), // red
+    glm::vec4(1.0, 1.0, 0.0, 1.0), // yellow
+    glm::vec4(0.0, 1.0, 0.0, 1.0), // green
+    glm::vec4(0.0, 0.0, 1.0, 1.0), // blue
+    glm::vec4(1.0, 0.0, 1.0, 1.0), // magenta
+    glm::vec4(1.0, 1.0, 1.0, 1.0), // white
+    glm::vec4(0.0, 1.0, 1.0, 1.0)  // cyan
 };
 
-enum { Xaxis = 0, Yaxis = 1, Zaxis = 2, NumAxes = 3 };
-int      Axis = Xaxis;
-GLfloat  Theta[NumAxes] = { 0.0, 0.0, 0.0 };
+enum
+{
+   Xaxis = 0,
+   Yaxis = 1,
+   Zaxis = 2,
+   NumAxes = 3
+};
+int Axis = Xaxis;
+GLfloat Theta[NumAxes] = {0.0, 0.0, 0.0};
 
-
-GLuint  mvpi; 
+GLuint mvpi;
 
 void quad(int a, int b, int c, int d)
 {
-	colors[Index] = vertex_colors[a]; points[Index] = vertices[a]; Index++;
-	colors[Index] = vertex_colors[b]; points[Index] = vertices[b]; Index++;
-	colors[Index] = vertex_colors[c]; points[Index] = vertices[c]; Index++;
-	colors[Index] = vertex_colors[a]; points[Index] = vertices[a]; Index++;
-	colors[Index] = vertex_colors[c]; points[Index] = vertices[c]; Index++;
-	colors[Index] = vertex_colors[d]; points[Index] = vertices[d]; Index++;
+   colors[Index] = vertex_colors[a];
+   points[Index] = vertices[a];
+   Index++;
+   colors[Index] = vertex_colors[b];
+   points[Index] = vertices[b];
+   Index++;
+   colors[Index] = vertex_colors[c];
+   points[Index] = vertices[c];
+   Index++;
+   colors[Index] = vertex_colors[a];
+   points[Index] = vertices[a];
+   Index++;
+   colors[Index] = vertex_colors[c];
+   points[Index] = vertices[c];
+   Index++;
+   colors[Index] = vertex_colors[d];
+   points[Index] = vertices[d];
+   Index++;
 }
-void
-colorcube()
+void colorcube()
 {
-	quad(1, 0, 3, 2);
-	quad(2, 3, 7, 6);
-	quad(3, 0, 4, 7);
-	quad(6, 5, 1, 2);
-	quad(4, 5, 6, 7);
-	quad(5, 4, 0, 1);
+   quad(1, 0, 3, 2);
+   quad(2, 3, 7, 6);
+   quad(3, 0, 4, 7);
+   quad(6, 5, 1, 2);
+   quad(4, 5, 6, 7);
+   quad(5, 4, 0, 1);
 }
 
 void init(void)
 {
-	colorcube();
+   colorcube();
 
-	// Create a vertex array object
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+   // Create a vertex array object
+   GLuint vao;
+   glGenVertexArrays(1, &vao);
+   glBindVertexArray(vao);
 
-	// Create and initialize a buffer object
-	GLuint buffer;
-	glGenBuffers(1, &buffer);
-	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points)+sizeof(colors), NULL, GL_STATIC_DRAW);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(points), points);
-	glBufferSubData(GL_ARRAY_BUFFER, sizeof(points), sizeof(colors), colors);
+   // Create and initialize a buffer object
+   GLuint buffer;
+   glGenBuffers(1, &buffer);
+   glBindBuffer(GL_ARRAY_BUFFER, buffer);
+   glBufferData(GL_ARRAY_BUFFER, sizeof(points) + sizeof(colors), NULL, GL_STATIC_DRAW);
+   glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(points), points);
+   glBufferSubData(GL_ARRAY_BUFFER, sizeof(points), sizeof(colors), colors);
 
-	// Load shaders and use the resulting shader program
-	program = InitShader("../vshader36.glsl", "../fshader36.glsl");
-	glUseProgram(program);
+   // Load shaders and use the resulting shader program
+   program = InitShader("../vshader36.glsl", "../fshader36.glsl");
+   glUseProgram(program);
 
-	// set up vertex arrays
-	GLuint vPosition = glGetAttribLocation(program, "vPosition");
-	glEnableVertexAttribArray(vPosition);
-	glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0,
-		NULL);
+   // set up vertex arrays
+   GLuint vPosition = glGetAttribLocation(program, "vPosition");
+   glEnableVertexAttribArray(vPosition);
+   glVertexAttribPointer(vPosition, 4, GL_FLOAT, GL_FALSE, 0,
+                         NULL);
 
-	GLuint vColor = glGetAttribLocation(program, "vColor");
-	glEnableVertexAttribArray(vColor);
-	glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0,
-		NULL);
+   GLuint vColor = glGetAttribLocation(program, "vColor");
+   glEnableVertexAttribArray(vColor);
+   glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0,
+                         NULL);
 
-	mvpi = glGetUniformLocation(program, "mvp");
+   mvpi = glGetUniformLocation(program, "mvp");
 
-	glEnable(GL_DEPTH_TEST);
-	glClearColor(1.0, 1.0, 1.0, 1.0);
+   glEnable(GL_DEPTH_TEST);
+   glClearColor(1.0, 1.0, 1.0, 1.0);
 }
 
-void mymouse(GLFWwindow* window, int button, int action, int mods)
+void mymouse(GLFWwindow *window, int button, int action, int mods)
 {
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
-        if (GLFW_PRESS == action) {
-            isPressed = true;
-            glfwGetCursorPos(window, &oldX, &oldY);
-        }
-        else if (GLFW_RELEASE == action) {
-            isPressed = false;
-            hrotate = 0;
-            vrotate = 0;
-        }
-    }
+
+   if (button == GLFW_MOUSE_BUTTON_LEFT)
+   {
+      if (GLFW_PRESS == action)
+      {
+         isPressed = true;
+         glfwGetCursorPos(window, &oldX, &oldY);
+      }
+      else if (GLFW_RELEASE == action)
+      {
+         isPressed = false;
+         hrotate = 0;
+         vrotate = 0;
+      }
+   }
 }
-static void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
+static void cursor_pos_callback(GLFWwindow *window, double xpos, double ypos)
 {
-    if (isPressed) {
-        hrotate += 0.01*(xpos - oldX);
-        vrotate += 0.01*(ypos - oldY);
-        model = glm::rotate(model, GLfloat(hrotate), glm::vec3(0.0, 1.0, 0.0));
-        model = glm::rotate(model, GLfloat(vrotate), glm::vec3(1.0, 0.0, 0.0));
-    }
+   if (isPressed)
+   {
+      hrotate += 0.01 * (xpos - oldX);
+      vrotate += 0.01 * (ypos - oldY);
+   }
+   model = glm::rotate(model, GLfloat(hrotate), glm::vec3(0.0, 1.0, 0.0));
+   model = glm::rotate(model, GLfloat(vrotate), glm::vec3(1.0, 0.0, 0.0));
 }
 
-void mykey(GLFWwindow* window, int key, int scancode, int action, int mods)
+void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
-    if (action == GLFW_PRESS) {
-        if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) glfwSetWindowShouldClose(window, GL_TRUE);
+   printf("%.2f", yoffset);
+   model = glm::translate(model, glm::vec3(0.0f, 0.0f, yoffset > 0 ? 0.1f : -0.1f));
+}
 
-        if (key == GLFW_KEY_1) model = glm::rotate(model, 10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-        
-        if (key == GLFW_KEY_2) model = glm::rotate(model, 10.0f, glm::vec3(-1.0f, 0.0f, 0.0f));
-        
-        if (key == GLFW_KEY_3) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
-        
-        if (key == GLFW_KEY_4) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, -1.0f, 0.0f));
-    
-        if (key == GLFW_KEY_5) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 0.0f, 1.0f));
-        
-        if (key == GLFW_KEY_6) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 0.0f, -1.0f));
-        
-        
-        if (key == GLFW_KEY_S) model = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+void mykey(GLFWwindow *window, int key, int scancode, int action, int mods)
+{
+   if (action == GLFW_PRESS)
+   {
+      if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q)
+      {
+         glfwSetWindowShouldClose(window, GL_TRUE);
+      }
+      if (key == GLFW_KEY_T)
+      {
+         model = glm::perspective(glm::radians(300.0f), 3.0f, 0.5f, 80.f);
+      }
+      if (key == GLFW_KEY_G)
+      {
+         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.1f));
+      }
+      if (key == GLFW_KEY_S)
+      {
+         model = glm::translate(model, glm::vec3(0.0f, +0.1f, 0.0f));
+      }
+      if (key == GLFW_KEY_A)
+      {
+         model = glm::translate(model, glm::vec3(-0.1f, 0.0f, 0.0f));
+      }
+      if (key == GLFW_KEY_W)
+      {
+         model = glm::translate(model, glm::vec3(0.0f, -0.1f, 0.0f));
+      }
+      if (key == GLFW_KEY_D)
+      {
+         model = glm::translate(model, glm::vec3(+0.1f, 0.0f, 0.0f));
+      }
+      if (key == GLFW_KEY_H)
+      {
+         model = glm::translate(model, glm::vec3(0.0f, 0.0f, -0.1f));
+      }
+      if (key == GLFW_KEY_X)
+      {
+         model = glm::rotate(model, GLfloat(10), glm::vec3(1.0f, 0.0f, 0.0f));
+      }
+      if (key == GLFW_KEY_Y)
+      {
+         model = glm::rotate(model, GLfloat(10), glm::vec3(0.0f, 1.0f, 0.0f));
+      }
+      if (key == GLFW_KEY_Z)
+      {
+         model = glm::rotate(model, GLfloat(10), glm::vec3(0.0f, 0.0f, 1.0f));
+      }
 
-        if (key == GLFW_KEY_LEFT) model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
-        
-        if (key == GLFW_KEY_RIGHT) model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
-        
-        if (key == GLFW_KEY_UP) model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
-      
-        if (key == GLFW_KEY_DOWN) model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
-        
-        if (key == GLFW_KEY_Z) model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
-    
-        if (key == GLFW_KEY_X) model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));
-        
-        if (key == GLFW_KEY_EQUAL) fov -= 5;
-        
-        if (key == GLFW_KEY_MINUS) fov += 5;
-        
-        if (key == GLFW_KEY_P) ar += .2;
-        
-        if (key == GLFW_KEY_O) ar -= .2;
-        
-        if (key == GLFW_KEY_I) ncp += .05;
-        
-        if (key == GLFW_KEY_U) ncp -= .05;
-        
-        if (key == GLFW_KEY_Y) fcp += 10;
-        
-        if (key == GLFW_KEY_T) fcp -= 10;
-        
-    }
+      if (key == GLFW_KEY_B)
+      {
+         model = glm::scale(glm::mat4(2.0f), glm::vec3(1.0f));
+         if (key == GLFW_KEY_B)
+         {
+            glm::mat4 model = glm::mat4(1.0);
+            model = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+
+            glm::vec3 eye(0.0f, 0.0f, 2.0f);
+            glm::vec3 at(0.0f, 0.0f, 0.0f);
+            glm::vec3 up(0.0, 1.0f, 0.0f);
+            glm::mat4 view = glm::lookAt(eye, at, up);
+
+            glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.0f);
+            glm::mat4 mvp = Projection * view * model;
+         }
+      }
+   }
 }
 //----------------------------------------------------------------------------
 
 int main(int argc, char **argv)
 {
-	GLFWwindow *window = NULL;
-	const GLubyte *renderer;
-	const GLubyte *version;
-	/* start GL context and O/S window using the GLFW helper library */
-	if (!glfwInit()) {
-		fprintf(stderr, "ERROR: could not start GLFW3\n");
-		return 1;
-	}
+   GLFWwindow *window = NULL;
+   const GLubyte *renderer;
+   const GLubyte *version;
+   /* start GL context and O/S window using the GLFW helper library */
+   if (!glfwInit())
+   {
+      fprintf(stderr, "ERROR: could not start GLFW3\n");
+      return 1;
+   }
 
-	/* We must specify 3.2 core if on Apple OS X -- other O/S can specify
+   /* We must specify 3.2 core if on Apple OS X -- other O/S can specify
 	anything here. I defined 'APPLE' in the makefile for OS X
 
 	Remove the #ifdef #endif and play around with this - you should be starting
 	an explicit version anyway, and some non-Apple drivers will require this too.
 	*/
 #ifdef __APPLE__
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #endif
-	window = glfwCreateWindow(640, 640, "simple", NULL, NULL);
+   window = glfwCreateWindow(640, 640, "simple", NULL, NULL);
 
-	if (!window) {
-		fprintf(stderr, "ERROR: could not open window with GLFW3\n");
-		glfwTerminate();
-		return 1;
-	}
-	glfwMakeContextCurrent(window);
-	/* start GLEW extension handler */
-	glewExperimental = GL_TRUE;
-	glewInit();
-	renderer = glGetString(GL_RENDERER); /* get renderer string */
-	version = glGetString(GL_VERSION);	 /* version as a string */
-	printf("Renderer: %s\n", renderer);
-	printf("OpenGL version supported %s\n", version);
-	init();
+   if (!window)
+   {
+      fprintf(stderr, "ERROR: could not open window with GLFW3\n");
+      glfwTerminate();
+      return 1;
+   }
+   glfwMakeContextCurrent(window);
+   /* start GLEW extension handler */
+   glewExperimental = GL_TRUE;
+   glewInit();
+   renderer = glGetString(GL_RENDERER); /* get renderer string */
+   version = glGetString(GL_VERSION);   /* version as a string */
+   printf("Renderer: %s\n", renderer);
+   printf("OpenGL version supported %s\n", version);
+   init();
 
-	glfwSetKeyCallback(window, mykey);
-	glfwSetMouseButtonCallback(window, mymouse);
+   glfwSetKeyCallback(window, mykey);
+   glfwSetMouseButtonCallback(window, mymouse);
    glfwSetCursorPosCallback(window, cursor_pos_callback);
-	//
+   glfwSetScrollCallback(window, scroll_callback);
+   //
+
+   do
+   {
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the window
 
 
-	do{
-		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);     // clear the window
+      glm::mat4 view = glm::lookAt(eye, at, up);
+      
+      glm::mat4 Projection = glm::perspective(glm::radians(450.0f), 1.0f, 0.1f, 100.f);
+      glm::mat4 mvp = Projection * view * model;
+        
+      glUniformMatrix4fv(mvpi, 1, GL_FALSE, glm::value_ptr(mvp));
+      glUniformMatrix4fv(mvpi, 1, GL_FALSE, glm::value_ptr(mvp));
 
-		// glm::mat4 model = glm::mat4(1.0);
-		glm::vec3 eye(0.0f, 0.0f, 2.0f);
-		glm::vec3 at(0.0f, 0.0f, 0.0f); 
-		glm::vec3 up(0.0, 1.0f, 0.0f); 
-		glm::mat4 view = glm::lookAt(eye, at, up);
+      glDrawArrays(GL_TRIANGLES, 0, NumVertices); // draw the points
+      /* update other events like input handling */
+      glfwPollEvents();
+      glfwSwapBuffers(window);
+   } while (!glfwWindowShouldClose(window));
 
-		glm::mat4 Projection = glm::perspective(glm::radians(fov), ar, ncp, fcp);
-		glm::mat4 mvp = Projection * view * model;
-
-		glUniformMatrix4fv(mvpi, 1, GL_FALSE, glm::value_ptr(mvp));
-
-		glDrawArrays(GL_TRIANGLES, 0, NumVertices);    // draw the points
-		/* update other events like input handling */
-		glfwPollEvents();
-		glfwSwapBuffers(window);
-	} while (!glfwWindowShouldClose(window));
-
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
-	return 0;
-
+   // Close OpenGL window and terminate GLFW
+   glfwTerminate();
+   return 0;
 }
