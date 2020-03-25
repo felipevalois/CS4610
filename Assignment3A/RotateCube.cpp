@@ -20,6 +20,16 @@ const int NumVertices = 36;
 glm::vec4 points[NumVertices];
 glm::vec4 colors[NumVertices];
 
+
+glm::mat4 model = glm::mat4(1.0);
+float fov = 45.0f;//field of view
+float ncp = 0.1f;//near clipping-plane
+float fcp = 100.0f;//far clipping-plane
+float ar = 1.0f;//aspect ratio
+bool isPressed = false;
+double oldX, oldY;
+float hrotate, vrotate;
+
 //----------------------------------------------------------------------------
 
 glm::vec4 vertices[8] = {
@@ -84,13 +94,12 @@ void init(void)
 	GLuint buffer;
 	glGenBuffers(1, &buffer);
 	glBindBuffer(GL_ARRAY_BUFFER, buffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points)+sizeof(colors),
-		NULL, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(points)+sizeof(colors), NULL, GL_STATIC_DRAW);
 	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(points), points);
 	glBufferSubData(GL_ARRAY_BUFFER, sizeof(points), sizeof(colors), colors);
 
 	// Load shaders and use the resulting shader program
-	program = InitShader("vshader36.glsl", "fshader36.glsl");
+	program = InitShader("../vshader36.glsl", "../fshader36.glsl");
 	glUseProgram(program);
 
 	// set up vertex arrays
@@ -112,18 +121,77 @@ void init(void)
 
 void mymouse(GLFWwindow* window, int button, int action, int mods)
 {
-	if (action == GLFW_PRESS) {
-
-	}
+    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+        if (GLFW_PRESS == action) {
+            isPressed = true;
+            glfwGetCursorPos(window, &oldX, &oldY);
+        }
+        else if (GLFW_RELEASE == action) {
+            isPressed = false;
+            hrotate = 0;
+            vrotate = 0;
+        }
+    }
+}
+static void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    if (isPressed) {
+        hrotate += 0.01*(xpos - oldX);
+        vrotate += 0.01*(ypos - oldY);
+        model = glm::rotate(model, GLfloat(hrotate), glm::vec3(0.0, 1.0, 0.0));
+        model = glm::rotate(model, GLfloat(vrotate), glm::vec3(1.0, 0.0, 0.0));
+    }
 }
 
 void mykey(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	if (action == GLFW_PRESS) {
-		if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) {
-			glfwSetWindowShouldClose(window, GL_TRUE);
-		}
-	}
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_ESCAPE || key == GLFW_KEY_Q) glfwSetWindowShouldClose(window, GL_TRUE);
+
+        if (key == GLFW_KEY_1) model = glm::rotate(model, 10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+        
+        if (key == GLFW_KEY_2) model = glm::rotate(model, 10.0f, glm::vec3(-1.0f, 0.0f, 0.0f));
+        
+        if (key == GLFW_KEY_3) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+        
+        if (key == GLFW_KEY_4) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, -1.0f, 0.0f));
+    
+        if (key == GLFW_KEY_5) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+        
+        if (key == GLFW_KEY_6) model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 0.0f, -1.0f));
+        
+        
+        if (key == GLFW_KEY_S) model = glm::scale(glm::mat4(1.0f), glm::vec3(0.5f));
+
+        if (key == GLFW_KEY_LEFT) model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+        
+        if (key == GLFW_KEY_RIGHT) model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+        
+        if (key == GLFW_KEY_UP) model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
+      
+        if (key == GLFW_KEY_DOWN) model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+        
+        if (key == GLFW_KEY_Z) model = glm::translate(model, glm::vec3(0.0f, 0.0f, 1.0f));
+    
+        if (key == GLFW_KEY_X) model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));
+        
+        if (key == GLFW_KEY_EQUAL) fov -= 5;
+        
+        if (key == GLFW_KEY_MINUS) fov += 5;
+        
+        if (key == GLFW_KEY_P) ar += .2;
+        
+        if (key == GLFW_KEY_O) ar -= .2;
+        
+        if (key == GLFW_KEY_I) ncp += .05;
+        
+        if (key == GLFW_KEY_U) ncp -= .05;
+        
+        if (key == GLFW_KEY_Y) fcp += 10;
+        
+        if (key == GLFW_KEY_T) fcp -= 10;
+        
+    }
 }
 //----------------------------------------------------------------------------
 
@@ -169,19 +237,20 @@ int main(int argc, char **argv)
 
 	glfwSetKeyCallback(window, mykey);
 	glfwSetMouseButtonCallback(window, mymouse);
+   glfwSetCursorPosCallback(window, cursor_pos_callback);
 	//
 
 
 	do{
 		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);     // clear the window
 
-		glm::mat4 model = glm::mat4(1.0);
+		// glm::mat4 model = glm::mat4(1.0);
 		glm::vec3 eye(0.0f, 0.0f, 2.0f);
 		glm::vec3 at(0.0f, 0.0f, 0.0f); 
 		glm::vec3 up(0.0, 1.0f, 0.0f); 
 		glm::mat4 view = glm::lookAt(eye, at, up);
 
-		glm::mat4 Projection = glm::perspective(glm::radians(45.0f), 1.0f, 0.1f, 100.f);
+		glm::mat4 Projection = glm::perspective(glm::radians(fov), ar, ncp, fcp);
 		glm::mat4 mvp = Projection * view * model;
 
 		glUniformMatrix4fv(mvpi, 1, GL_FALSE, glm::value_ptr(mvp));
