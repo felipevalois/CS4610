@@ -43,10 +43,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C
+CMAKE_SOURCE_DIR = /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build
+CMAKE_BINARY_DIR = /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Part-C.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/Part-C.dir/flags.make
 
 CMakeFiles/Part-C.dir/InitShader.cpp.o: CMakeFiles/Part-C.dir/flags.make
 CMakeFiles/Part-C.dir/InitShader.cpp.o: ../InitShader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Part-C.dir/InitShader.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Part-C.dir/InitShader.cpp.o -c /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/InitShader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Part-C.dir/InitShader.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Part-C.dir/InitShader.cpp.o -c /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/InitShader.cpp
 
 CMakeFiles/Part-C.dir/InitShader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Part-C.dir/InitShader.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/InitShader.cpp > CMakeFiles/Part-C.dir/InitShader.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/InitShader.cpp > CMakeFiles/Part-C.dir/InitShader.cpp.i
 
 CMakeFiles/Part-C.dir/InitShader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Part-C.dir/InitShader.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/InitShader.cpp -o CMakeFiles/Part-C.dir/InitShader.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/InitShader.cpp -o CMakeFiles/Part-C.dir/InitShader.cpp.s
 
 CMakeFiles/Part-C.dir/RotateCube.cpp.o: CMakeFiles/Part-C.dir/flags.make
 CMakeFiles/Part-C.dir/RotateCube.cpp.o: ../RotateCube.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Part-C.dir/RotateCube.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Part-C.dir/RotateCube.cpp.o -c /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/RotateCube.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Part-C.dir/RotateCube.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Part-C.dir/RotateCube.cpp.o -c /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/RotateCube.cpp
 
 CMakeFiles/Part-C.dir/RotateCube.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Part-C.dir/RotateCube.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/RotateCube.cpp > CMakeFiles/Part-C.dir/RotateCube.cpp.i
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/RotateCube.cpp > CMakeFiles/Part-C.dir/RotateCube.cpp.i
 
 CMakeFiles/Part-C.dir/RotateCube.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Part-C.dir/RotateCube.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/RotateCube.cpp -o CMakeFiles/Part-C.dir/RotateCube.cpp.s
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/RotateCube.cpp -o CMakeFiles/Part-C.dir/RotateCube.cpp.s
 
 # Object files for target Part-C
 Part__C_OBJECTS = \
@@ -97,7 +97,7 @@ Part-C: CMakeFiles/Part-C.dir/build.make
 Part-C: /usr/local/Cellar/glfw/3.3.2/lib/libglfw.3.3.dylib
 Part-C: /usr/local/Cellar/glew/2.1.0_1/lib/libGLEW.2.1.0.dylib
 Part-C: CMakeFiles/Part-C.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Part-C"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable Part-C"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Part-C.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -110,6 +110,6 @@ CMakeFiles/Part-C.dir/clean:
 .PHONY : CMakeFiles/Part-C.dir/clean
 
 CMakeFiles/Part-C.dir/depend:
-	cd /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles/Part-C.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles/Part-C.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Part-C.dir/depend
 

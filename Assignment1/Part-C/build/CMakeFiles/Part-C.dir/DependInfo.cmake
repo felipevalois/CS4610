@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/InitShader.cpp" "/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles/Part-C.dir/InitShader.cpp.o"
-  "/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/RotateCube.cpp" "/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles/Part-C.dir/RotateCube.cpp.o"
+  "/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/InitShader.cpp" "/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles/Part-C.dir/InitShader.cpp.o"
+  "/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/RotateCube.cpp" "/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles/Part-C.dir/RotateCube.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

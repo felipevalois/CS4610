@@ -54,10 +54,10 @@ RM = /Applications/CMake.app/Contents/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C
+CMAKE_SOURCE_DIR = /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build
+CMAKE_BINARY_DIR = /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -74,7 +74,7 @@ clean: CMakeFiles/Part-C.dir/clean
 CMakeFiles/Part-C.dir/all:
 	$(MAKE) -f CMakeFiles/Part-C.dir/build.make CMakeFiles/Part-C.dir/depend
 	$(MAKE) -f CMakeFiles/Part-C.dir/build.make CMakeFiles/Part-C.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=1,2,3 "Built target Part-C"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles --progress-num=1,2,3 "Built target Part-C"
 .PHONY : CMakeFiles/Part-C.dir/all
 
 # Include target in all.
@@ -84,9 +84,9 @@ all: CMakeFiles/Part-C.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Part-C.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Part-C.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/build/CMakeFiles 0
 .PHONY : CMakeFiles/Part-C.dir/rule
 
 # Convenience name for target.

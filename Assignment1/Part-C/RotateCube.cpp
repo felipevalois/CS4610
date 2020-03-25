@@ -86,7 +86,7 @@ void init(void)
 	glBufferSubData(GL_ARRAY_BUFFER, sizeof(points), sizeof(colors), colors);
 
 	// Load shaders and use the resulting shader program
-	GLuint program = InitShader("./vshader36.glsl", "./fshader36.glsl");
+	GLuint program = InitShader("../vshader36.glsl", "../fshader36.glsl");
 	glUseProgram(program);
 
 	// set up vertex arrays

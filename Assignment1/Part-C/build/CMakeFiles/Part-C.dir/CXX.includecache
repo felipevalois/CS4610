@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/Angel.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/Angel.h
 cmath
 -
 iostream
@@ -16,33 +16,29 @@ OpenGL/OpenGL.h
 GLUT/glut.h
 -
 vec.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/vec.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/vec.h
 mat_for_mac.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/mat_for_mac.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/mat_for_mac.h
 
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/InitShader.cpp
-Angel.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/Angel.h
-
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/RotateCube.cpp
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/RotateCube.cpp
 GL/glew.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/GL/glew.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/GL/glew.h
 stdio.h
 -
 stdlib.h
 -
 GLFW/glfw3.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/GLFW/glfw3.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/GLFW/glfw3.h
 Angel.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/Angel.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/Angel.h
 
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/mat_for_mac.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/mat_for_mac.h
 vec.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/vec.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/vec.h
 
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/vec.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/vec.h
 Angel.h
-/Users/felipecosta/Desktop/CS4610/github/Assignment1/Part-C/Angel.h
+/Users/felipecosta/Desktop/cs4610/github/Assignment1/Part-C/Angel.h
 
 /usr/local/Cellar/glew/2.1.0_1/include/GL/glew.h
 stddef.h
